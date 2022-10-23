@@ -1,17 +1,14 @@
 <?php
 $keyword = $_GET["keyword"];
-$conn = mysql_connect("localhost", "root", "1234");
+$conn = mysqli_connect("localhost", "root", "");
 if ($conn) {
-    mysql_select_db("blueshop");
-    mysql_query("SET NAMES utf8");
-} else {
-    echo mysql_errno();
-}
+    mysqli_select_db($conn,"blueshop");
+} 
 $sql = "SELECT * FROM member WHERE username LIKE '%$keyword%'";
-$objQuery = mysql_query($sql);
+$objQuery = mysqli_query($conn,$sql);
 ?>
 <table border="1">
-    <?php while ($row = mysql_fetch_array($objQuery)) : ?>
+    <?php while ($row = mysqli_fetch_array($objQuery)) : ?>
         <tr>
             <td><?php echo $row["name"] ?></a></td>
             <td><?php echo $row["address"] ?></td>
